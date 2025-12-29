@@ -46,7 +46,7 @@ exports.loginAdmin = asynchandler(async(req,res) =>{
     res.cookie("admin",token,{
         maxAge : 1000 * 60 * 60 * 24 * 365,
         httpOnly : true,
-        secure: process.env.NODE_ENV === "production"
+        secure: true
     })
 
     res.json({
@@ -115,7 +115,8 @@ exports.verifyCustomerOtp = asynchandler(async(req,res)=>{
     res.cookie("customer",token,{
         maxAge: 1000 * 60 * 60 * 24 *365,
         httpOnly:true,
-        secure:process.env.NODE_ENV === "production"
+        secure: true,       
+        sameSite: "none",
     })
     
     res.json({
@@ -212,7 +213,7 @@ exports.loginRental = asynchandler(async(req,res) =>{
     res.cookie("rental",token,{
         maxAge : 1000 * 60 * 60 * 24 * 365,
         httpOnly : true,
-        secure: process.env.NODE_ENV === "production"
+        secure: true
     })
 
     res.json({
