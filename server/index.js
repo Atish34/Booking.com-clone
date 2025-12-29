@@ -22,7 +22,7 @@ app.use("/api/owner",ownerProtected,require("./routes/owner.routes"))
 app.use("/api/rental",rentalProtected,require("./routes/rental.routes"))
 app.use("/api/customer",require("./routes/customer.routes"))
 
-app.get("/*", (req, res) => {
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
