@@ -8,7 +8,7 @@ require("dotenv").config()
 const app = express()
 app.use(express.json())
 app.use(cookieparser())
-
+app.use(express.static("dist"))
 app.use(cors({
     origin:true,
     credentials:true
@@ -19,6 +19,10 @@ app.use("/api/admin",adminProtected,require("./routes/admin.routes"))
 app.use("/api/owner",ownerProtected,require("./routes/owner.routes"))
 app.use("/api/rental",rentalProtected,require("./routes/rental.routes"))
 app.use("/api/customer",require("./routes/customer.routes"))
+
+app.use("*", (req, res) => {
+    res.sendFile(path.join(__dirname,"dist","index.html"))
+})
 
 mongoose.connect(process.env.MONGO_URL)
 mongoose.connection.once("open",()=>{
